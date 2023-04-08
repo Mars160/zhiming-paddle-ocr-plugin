@@ -8,4 +8,5 @@ def ocr(img):
     result = []
     for i in ocr_result:
         result.append(i[1][0])
+    print(result)
     return result

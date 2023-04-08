@@ -23,7 +23,7 @@ class OCR(Resource):
         response = response_base.copy()
         if uuid in self.OCR_DICT:
             if self.OCR_DICT[uuid] != 0:
-                response['data'] = self.OCR_DICT[uuid]
+                response['data'] = self.OCR_DICT[uuid].copy()
                 del self.OCR_DICT[uuid]
             else:
                 response['data'] = None
@@ -31,6 +31,7 @@ class OCR(Resource):
         else:
             response['backend'] = 404
             response['msg'] = 'OCR任务不存在'
+        print(self.OCR_DICT)
         return response
 
     # @jwt_required()
@@ -38,7 +39,6 @@ class OCR(Resource):
         response = response_base.copy()
         file = request.files['file']
         if file and allowed_file(file.filename):
-            ext = file.filename.rsplit('.', 1)[1]
             random_name = '{}'.format(uuid.uuid4().hex)
             file.save('{}{}{}'.format(TEMP_DIR, os.sep, random_name))
 
