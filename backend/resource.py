@@ -1,3 +1,4 @@
+import logging
 import os
 from threading import Thread
 
@@ -31,7 +32,7 @@ class OCR(Resource):
         else:
             response['backend'] = 404
             response['msg'] = 'OCR任务不存在'
-        print(self.OCR_DICT)
+        logging.warning(self.OCR_DICT)
         return response
 
     # @jwt_required()
